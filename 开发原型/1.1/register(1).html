@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI课程教辅系统 - 注册页</title>
+<style>
+:root{--blue:#2563eb;--purple:#7c3aed;--cyan:#06b6d4;--bg:#f5f7fb;--text:#172033;--muted:#6b7280;--card:#fff;--line:#e5e7eb;--danger:#ef4444;--ok:#16a34a;--warn:#f59e0b}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;background:linear-gradient(135deg,#eef6ff 0%,#f8f5ff 45%,#ecfeff 100%);color:var(--text)}
+.page{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}.hero{position:relative;padding:72px 72px;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 18% 20%,rgba(37,99,235,.22),transparent 28%),radial-gradient(circle at 82% 75%,rgba(124,58,237,.24),transparent 35%)}
+.logo{display:inline-flex;align-items:center;gap:12px;font-weight:800;font-size:22px;margin-bottom:54px}.logo-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));display:grid;place-items:center;color:#fff;box-shadow:0 14px 30px rgba(37,99,235,.28)}
+h1{font-size:56px;line-height:1.08;margin:0 0 22px;letter-spacing:-1px}.subtitle{font-size:22px;color:#334155;margin-bottom:34px}.tags{display:flex;gap:12px;flex-wrap:wrap}.tag{padding:10px 14px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);border-radius:999px;color:#334155;backdrop-filter:blur(8px)}
+.flow{margin-top:54px;display:flex;gap:14px;align-items:center;color:#475569}.flow span{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 16px;box-shadow:0 10px 26px rgba(15,23,42,.07)}.arrow{color:var(--blue);font-weight:900}.login-wrap{display:flex;align-items:center;justify-content:center;padding:50px}.card{width:460px;background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.9);border-radius:28px;padding:34px;box-shadow:0 24px 80px rgba(15,23,42,.13);backdrop-filter:blur(14px)}
+.card h2{font-size:30px;margin:0 0 8px}.hint{color:var(--muted);margin:0 0 24px}.field{margin-bottom:16px}.field label{display:block;font-weight:700;margin-bottom:8px}.input{width:100%;height:48px;border:1px solid var(--line);border-radius:14px;padding:0 14px;font-size:15px;background:#fff;outline:none}.input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.roles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:8px 0 18px}.role input{display:none}.role span{display:block;text-align:center;padding:13px 10px;border:1px solid var(--line);border-radius:14px;background:#fff;color:#475569;cursor:pointer;font-weight:700;transition:all .15s}.role input:checked+span{border-color:var(--blue);background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(124,58,237,.12));color:var(--blue)}
+.row{display:flex;align-items:center;justify-content:center;margin:6px 0 18px;color:#64748b;font-size:14px}.row a{color:var(--blue);text-decoration:none;font-weight:700}.btn{width:100%;height:50px;border:0;border-radius:16px;color:#fff;font-size:16px;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 14px 30px rgba(37,99,235,.28);cursor:pointer;transition:transform .15s,box-shadow .15s}.btn:hover{transform:translateY(-1px);box-shadow:0 18px 36px rgba(37,99,235,.32)}
+.btn-secondary{width:100%;height:50px;border:2px solid var(--line);border-radius:16px;color:#475569;font-size:16px;font-weight:800;background:#fff;cursor:pointer;margin-top:12px;transition:all .15s}.btn-secondary:hover{border-color:var(--blue);color:var(--blue);background:rgba(37,99,235,.04)}
+.divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:#94a3b8;font-size:13px}.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.agree{display:flex;align-items:flex-start;gap:8px;margin:4px 0 18px;color:#64748b;font-size:13px;line-height:1.5}.agree input{margin-top:2px}.agree a{color:var(--blue);text-decoration:none}
+@media(max-width:900px){.page{grid-template-columns:1fr}.hero{padding:46px 28px}.login-wrap{padding:28px}.card{width:100%}h1{font-size:40px}.flow{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="hero">
+    <div class="logo"><div class="logo-mark">AI</div>AI课程教辅系统</div>
+    <h1>《软件需求分析原理与实践》的智能教学辅助平台</h1>
+    <div class="tags"><span class="tag">AI 解析课程资源</span><span class="tag">RAG 课程知识库</span><span class="tag">知识图谱可视化</span><span class="tag">能力诊断与个性化路径</span></div>
+    <div class="flow"><span>资源导入</span><b class="arrow">→</b><span>AI解析</span><b class="arrow">→</b><span>教师审核</span><b class="arrow">→</b><span>学生练习</span><b class="arrow">→</b><span>能力诊断</span></div>
+  </section>
+  <section class="login-wrap">
+    <div class="card">
+      <h2>注册账号</h2>
+      <p class="hint">选择身份并填写信息完成注册</p>
+      
+      <label style="font-weight:700">注册身份</label>
+      <div class="roles">
+        <label class="role"><input type="radio" name="role" value="teacher" checked><span>教师</span></label>
+        <label class="role"><input type="radio" name="role" value="student"><span>学生</span></label>
+      </div>
+      
+      <div class="field"><label>账号</label><input class="input" placeholder="请输入注册账号"></div>
+      <div class="field"><label>姓名</label><input class="input" placeholder="请输入真实姓名"></div>
+      <div class="field"><label>密码</label><input class="input" type="password" placeholder="请设置登录密码（6-20位）"></div>
+      <div class="field"><label>确认密码</label><input class="input" type="password" placeholder="请再次输入密码"></div>
+      
+      <div class="agree">
+        <input type="checkbox" id="agree" checked>
+        <label for="agree">我已阅读并同意<a href="#">《用户服务协议》</a>和<a href="#">《隐私政策》</a></label>
+      </div>
+      
+      <button class="btn" onclick="register()">立即注册</button>
+      <div class="divider">或</div>
+      <button class="btn-secondary" onclick="location.href='index.html'">已有账号？去登录</button>
+    </div>
+  </section>
+</div>
+<script>
+function register(){
+  const role = document.querySelector('input[name="role"]:checked').value;
+  const agree = document.getElementById('agree').checked;
+  if(!agree){alert('请先同意用户服务协议');return;}
+  const map = {teacher:'teacher.html',student:'student.html'};
+  location.href = map[role];
+}
+</script>
+</body>
+</html>
