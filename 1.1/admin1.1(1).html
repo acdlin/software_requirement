@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>管理员端 - AI课程教辅系统</title><style>
+:root{--b:#2563eb;--p:#7c3aed;--c:#06b6d4;--bg:#f6f8fc;--card:#fff;--text:#172033;--muted:#64748b;--line:#e5e7eb;--ok:#16a34a;--warn:#f59e0b;--bad:#ef4444}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;color:var(--text)}.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}.side{background:#111827;color:#cbd5e1;padding:22px;position:sticky;top:0;height:100vh}.brand{display:flex;gap:10px;align-items:center;color:#fff;font-size:19px;font-weight:900;margin-bottom:26px}.mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,#06b6d4,#2563eb);display:grid;place-items:center}.nav a{display:block;color:#cbd5e1;text-decoration:none;padding:13px 14px;border-radius:14px;margin:5px 0;cursor:pointer}.nav a:hover,.nav a.active{background:rgba(255,255,255,.1);color:#fff}.top{height:70px;background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}.content{padding:28px}.section{display:none}.section.active{display:block}.title{display:flex;align-items:end;justify-content:space-between;margin-bottom:18px}.title h1{font-size:28px;margin:0}.title p{color:var(--muted);margin:6px 0 0}.grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.metric b{font-size:28px;display:block;margin-top:8px}.metric span{color:var(--muted)}.badge{display:inline-block;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}.blue{background:#dbeafe;color:#1d4ed8}.green{background:#dcfce7;color:#15803d}.yellow{background:#fef3c7;color:#b45309}.red{background:#fee2e2;color:#b91c1c}.purple{background:#ede9fe;color:#6d28d9}.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer;background:#eef2ff;color:#3730a3}.btn.primary{background:linear-gradient(135deg,var(--b),var(--p));color:#fff}.btn.danger{background:#fee2e2;color:#b91c1c}.table{width:100%;border-collapse:separate;border-spacing:0 10px}.table th{font-size:13px;color:#64748b;text-align:left}.table td,.table th{padding:12px}.table tbody tr{background:#fff;box-shadow:0 6px 20px rgba(15,23,42,.04)}.input{height:40px;border:1px solid var(--line);border-radius:12px;padding:0 12px}.chart{height:260px;border-radius:18px;background:repeating-linear-gradient(90deg,#eff6ff 0 28px,#f8fafc 28px 56px);display:flex;align-items:end;gap:18px;padding:22px}.bar{width:48px;background:linear-gradient(180deg,var(--b),var(--c));border-radius:10px 10px 0 0}.log{background:#0f172a;color:#cbd5e1;border-radius:18px;padding:18px;font-family:Consolas,monospace;line-height:1.8;min-height:260px}.warnbox{border:1px dashed #f59e0b;background:#fffbeb;color:#92400e;border-radius:16px;padding:14px;margin:12px 0}.perm{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.perm div{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--b),var(--c));width:94%}@media(max-width:1200px){.grid6{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.app{grid-template-columns:1fr}.side{height:auto;position:relative}.nav{display:flex;overflow:auto}.grid6,.grid3,.grid2,.perm{grid-template-columns:1fr}}
+
+/* ===== 用户头像下拉菜单样式 ===== */
+.user-menu{position:relative;display:inline-block;cursor:pointer}
+.user-trigger{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:12px;transition:background .2s}
+.user-trigger:hover{background:rgba(37,99,235,.08)}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--p));color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex-shrink:0}
+.user-name{font-weight:600;color:var(--text);font-size:14px}
+.dropdown{display:none;position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 28px rgba(15,23,42,.12);min-width:160px;overflow:hidden;z-index:100}
+.dropdown.show{display:block}
+.dropdown-item{display:flex;align-items:center;gap:10px;padding:12px 16px;color:var(--text);text-decoration:none;font-size:14px;transition:background .15s;border:none;background:none;width:100%;cursor:pointer}
+.dropdown-item:hover{background:#f1f5f9}
+.dropdown-item.logout{color:var(--bad)}
+.dropdown-item.logout:hover{background:#fee2e2}
+.dropdown-divider{height:1px;background:var(--line);margin:4px 0}
+</style></head><body><div class="app"><aside class="side"><div class="brand"><div class="mark">管</div>系统管理员</div><nav class="nav"><a class="active" onclick="show('home',this)">后台首页</a><a onclick="show('users',this)">用户管理</a><a onclick="show('course',this)">课程管理</a><a onclick="show('kb',this)">知识库管理</a><a onclick="show('model',this)">模型服务监控</a><a onclick="show('perm',this)">权限管理</a><a onclick="show('logs',this)">系统日志</a><a onclick="show('profile',this)">个人中心</a></nav></aside><main><header class="top"><b>AI课程教辅系统｜管理员后台</b>
+<div style="display:flex;align-items:center;gap:20px">
+  <span>🔐 数据安全监控中</span>
+  <div class="user-menu" id="userMenu">
+    <div class="user-trigger" onclick="toggleMenu()">
+      <div class="avatar">管</div>
+      <span class="user-name">管理员</span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="opacity:.5"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="dropdown" id="userDropdown">
+      <a class="dropdown-item" onclick="jump('profile')"><span>👤</span> 个人中心</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item logout" href="login1.1.html"><span>🚪</span> 退出登录</a>
+    </div>
+  </div>
+</div>
+</header><div class="content">
+<section id="home" class="section active"><div class="title"><div><h1>系统管理员后台</h1><p>基础维护、用户管理、知识库状态监控和模型服务监控。</p></div><button class="btn primary">导出运维报告</button></div><div class="grid6"><div class="card metric"><span>用户总数</span><b>1,286</b></div><div class="card metric"><span>教师数量</span><b>42</b></div><div class="card metric"><span>学生数量</span><b>1,218</b></div><div class="card metric"><span>课程资源</span><b>328</b></div><div class="card metric"><span>知识库文档</span><b>512</b></div><div class="card metric"><span>今日AI请求</span><b>8,642</b></div></div><div class="grid2" style="margin-top:16px"><div class="card"><h3>RAG 检索性能</h3><p>平均响应时间：420ms</p><div class="progress"><i style="width:78%"></i></div><p>成功率：99.2%</p><p>并发请求：126</p></div><div class="card"><h3>数据安全诉求</h3><p>课程资料访问需绑定课程权限。</p><p>AI 问答回答需展示课程来源引用。</p><p>管理员可查看日志，但不可直接修改教师审核结论。</p></div></div></section>
+<section id="users" class="section"><div class="title"><div><h1>用户管理</h1><p>管理教师、学生和管理员账号。</p></div><button class="btn primary">新增用户</button></div><p><input class="input" placeholder="搜索姓名/账号/学号"> <button class="btn">搜索</button></p><table class="table"><thead><tr><th>姓名</th><th>账号</th><th>角色</th><th>所属课程/班级</th><th>状态</th><th>操作</th></tr></thead><tbody><tr><td>杨老师</td><td>teacher001</td><td><span class="badge blue">教师</span></td><td>软件需求分析原理与实践</td><td><span class="badge green">正常</span></td><td><button class="btn">重置密码</button> <button class="btn">禁用</button></td></tr><tr><td>张同学</td><td>student001</td><td><span class="badge purple">学生</span></td><td>软件工程 2401</td><td><span class="badge green">正常</span></td><td><button class="btn">查看</button></td></tr></tbody></table></section>
+<section id="course" class="section"><div class="title"><div><h1>课程管理</h1><p>维护课程、班级和授课教师关系。</p></div><button class="btn primary">新增课程</button></div><div class="grid3"><div class="card"><h3>《软件需求分析原理与实践》</h3><p>授课教师：杨老师</p><p>学生数：86</p><p>资源数：128</p><button class="btn">查看详情</button></div><div class="card"><h3>软件工程导论</h3><p>授课教师：王老师</p><p>学生数：112</p><p>资源数：74</p><button class="btn">查看详情</button></div><div class="card"><h3>系统分析与设计</h3><p>授课教师：陈老师</p><p>学生数：95</p><p>资源数：86</p><button class="btn">查看详情</button></div></div></section>
+<section id="kb" class="section"><div class="title"><div><h1>知识库管理</h1><p>监控文档向量化、索引状态和课程归属。</p></div><button class="btn primary">批量重建索引</button></div><div class="warnbox">知识库文档用于 RAG 检索与 AI 问答，删除或重建索引可能影响教师组卷和学生问答。</div><table class="table"><thead><tr><th>文档名称</th><th>向量化状态</th><th>更新时间</th><th>所属课程</th><th>切片数</th><th>操作</th></tr></thead><tbody><tr><td>第4章 UML建模.pptx</td><td><span class="badge green">已完成</span></td><td>2026-05-06</td><td>软件需求分析</td><td>168</td><td><button class="btn">重建索引</button> <button class="btn">查看详情</button></td></tr><tr><td>需求获取案例.pdf</td><td><span class="badge yellow">向量化中</span></td><td>2026-05-08</td><td>软件需求分析</td><td>92</td><td><button class="btn danger">删除</button></td></tr></tbody></table></section>
+<section id="model" class="section"><div class="title"><div><h1>模型服务监控</h1><p>监控 RAG 检索、AI 请求成功率、错误日志与并发量。</p></div></div><div class="grid3"><div class="card metric"><span>RAG平均响应时间</span><b>420ms</b><span class="badge green">稳定</span></div><div class="card metric"><span>AI请求成功率</span><b>99.2%</b><span class="badge green">正常</span></div><div class="card metric"><span>并发请求数量</span><b>126</b><span class="badge yellow">较高</span></div></div><div class="grid2" style="margin-top:16px"><div class="card"><h3>请求趋势</h3><div class="chart"><div class="bar" style="height:40%"></div><div class="bar" style="height:58%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:52%"></div><div class="bar" style="height:86%"></div><div class="bar" style="height:76%"></div></div></div><div class="card"><h3>错误日志摘要</h3><p><span class="badge yellow">WARN</span> 检索超时 3 次</p><p><span class="badge red">ERROR</span> 文档切片解析失败 1 次</p><p><span class="badge blue">INFO</span> 索引重建完成 12 个文档</p></div></div></section>
+<section id="perm" class="section"><div class="title"><div><h1>权限管理</h1><p>体现用户、课程资源、RAG知识库访问权限控制。</p></div></div><div class="perm"><div><h3>教师</h3><p>上传资源、审核知识点、发布试卷、查看班级分析。</p></div><div><h3>学生</h3><p>查看已发布知识图谱、完成练习、使用课程问答。</p></div><div><h3>管理员</h3><p>维护用户、课程、知识库状态和模型服务。</p></div><div><h3>安全规则</h3><p>跨课程资源不可见，AI回答必须绑定来源引用。</p></div></div></section>
+<section id="logs" class="section"><div class="title"><div><h1>系统日志</h1><p>查看平台运行日志和关键操作审计。</p></div><button class="btn">下载日志</button></div><div class="log">[2026-05-08 09:12:02] INFO  teacher001 上传 第4章 UML建模.pptx<br>[2026-05-08 09:12:35] INFO  rag-indexer 文档向量化完成 chunks=168<br>[2026-05-08 10:20:11] WARN  llm-service 检索响应超过阈值 1200ms<br>[2026-05-08 11:04:43] INFO  teacher001 发布 需求获取专项练习<br>[2026-05-08 11:28:19] ERROR parser 需求获取案例.pdf 第12页解析失败，已进入重试队列</div></section>
+</div></main></div><script>
+function show(id,el){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');window.scrollTo(0,0)}
+function jump(id){show(id,document.querySelector('.nav a[onclick*="'+id+'"]'));const d=document.getElementById('userDropdown');if(d)d.classList.remove('show')}
+
+/* ===== 用户菜单交互 ===== */
+function toggleMenu(){
+  const d=document.getElementById('userDropdown');
+  d.classList.toggle('show');
+}
+// 点击页面其他地方关闭下拉菜单
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('userMenu');
+  if(!menu.contains(e.target)){
+    document.getElementById('userDropdown').classList.remove('show');
+  }
+});
+</script><script>
+window.PROFILE_CONFIG={
+  pageKey:'admin',
+  realName:'管理员',
+  role:'管理员',
+  account:'admin001',
+  personId:'A2024001',
+  organizationLabel:'所属部门',
+  organization:'教辅平台运维与数据安全中心',
+  email:'admin@example.edu.cn',
+  phone:'',
+  defaultAvatarText:'管',
+  description:'管理员账号、头像和展示名称设置。',
+  statsTitle:'管理员概览',
+  stats:[
+    {label:'管理用户总数',value:'1,286'},
+    {label:'教师账号',value:'42'},
+    {label:'学生账号',value:'1,218'},
+    {label:'今日AI请求',value:'8,642'}
+  ],
+  actions:[
+    {label:'修改密码'},
+    {label:'权限设置',target:'perm'},
+    {label:'系统日志',target:'logs'}
+  ]
+};
+</script><script src="profile-settings.js"></script></body></html>

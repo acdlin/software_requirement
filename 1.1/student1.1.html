@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>学生端 - AI课程教辅系统</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+:root{--b:#2563eb;--p:#7c3aed;--c:#06b6d4;--bg:#f6f8fc;--card:#fff;--text:#172033;--muted:#64748b;--line:#e5e7eb;--ok:#16a34a;--warn:#f59e0b;--bad:#ef4444}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#f8fbff,#f6f8fc);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;color:var(--text)}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{background:#101827;color:#cbd5e1;padding:22px;height:100vh;position:sticky;top:0}.brand{display:flex;gap:10px;align-items:center;color:#fff;font-weight:900;font-size:19px;margin-bottom:26px}.mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--c),var(--p));display:grid;place-items:center}.nav a{display:block;color:#cbd5e1;text-decoration:none;padding:13px 14px;border-radius:14px;margin:5px 0;cursor:pointer}.nav a:hover,.nav a.active{background:rgba(255,255,255,.1);color:#fff}.main{min-width:0}.top{height:70px;background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}.content{padding:28px}.section{display:none}.section.active{display:block}.title{display:flex;align-items:end;justify-content:space-between;margin-bottom:18px}.title h1{font-size:28px;margin:0}.title p{color:var(--muted);margin:6px 0 0}.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.layout3{display:grid;grid-template-columns:260px 1fr 310px;gap:16px}.layout2side{display:grid;grid-template-columns:1fr 310px;gap:16px}.badge{display:inline-block;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}.blue{background:#dbeafe;color:#1d4ed8}.green{background:#dcfce7;color:#15803d}.yellow{background:#fef3c7;color:#b45309}.red{background:#fee2e2;color:#b91c1c}.gray{background:#f1f5f9;color:#475569}.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer;background:#eef2ff;color:#3730a3}.btn.primary{background:linear-gradient(135deg,var(--b),var(--p));color:#fff}.metric b{font-size:30px;display:block;margin-top:8px}.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--b),var(--c));width:68%}.graph{height:420px;border-radius:22px;background:radial-gradient(circle at 50% 45%,rgba(37,99,235,.12),transparent 20%),linear-gradient(135deg,#f8fbff,#f5f3ff);position:relative}.node{position:absolute;border-radius:999px;padding:12px 15px;background:#fff;border:2px solid #93c5fd;box-shadow:0 12px 28px rgba(37,99,235,.12);font-weight:800;cursor:pointer}.master{border-color:#22c55e;background:#dcfce7}.learn{border-color:#60a5fa;background:#dbeafe}.weak{border-color:#ef4444;background:#fee2e2}.unlearn{border-color:#cbd5e1;background:#f1f5f9}.n1{left:42%;top:40%}.n2{left:18%;top:18%}.n3{right:18%;top:18%}.n4{left:22%;bottom:18%}.n5{right:18%;bottom:18%}.line{position:absolute;height:2px;background:#bfdbfe;transform-origin:left}.l1{left:45%;top:45%;width:190px;transform:rotate(-28deg)}.l2{left:32%;top:33%;width:150px;transform:rotate(25deg)}.l3{left:44%;top:52%;width:180px;transform:rotate(33deg)}.l4{left:35%;top:58%;width:140px;transform:rotate(-34deg)}.timeline{position:relative;padding-left:20px}.task{border-left:4px solid #93c5fd;padding:0 0 18px 18px;margin-bottom:8px}.task h3{margin:0 0 8px}.question{font-size:20px;line-height:1.7}.option{border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;background:#fff}.qnav{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.qnav span{border-radius:10px;padding:10px;text-align:center;background:#f1f5f9}.qnav .done{background:#dcfce7}.qnav .mark{background:#fef3c7;color:#92400e;width:auto;height:auto}.table{width:100%;border-collapse:separate;border-spacing:0 10px}.table th{font-size:13px;color:#64748b;text-align:left}.table td,.table th{padding:12px}.table tbody tr{background:#fff;box-shadow:0 6px 20px rgba(15,23,42,.04)}.radar{height:330px;border-radius:22px;overflow:hidden}.chat{display:grid;grid-template-columns:260px 1fr;gap:16px;height:650px}.history{overflow:auto}.msg{max-width:72%;padding:14px 16px;border-radius:18px;margin:12px 0;line-height:1.7}.ai{background:#eff6ff}.me{background:#ede9fe;margin-left:auto}.inputbar{display:flex;gap:10px;border-top:1px solid var(--line);padding-top:14px}.input{height:42px;border:1px solid var(--line);border-radius:12px;padding:0 12px;width:100%}.warnbox{border:1px dashed #f59e0b;background:#fffbeb;color:#92400e;border-radius:16px;padding:14px;margin:12px 0}.hero{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;border:0}.hero p{color:#dbeafe}.quick{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.quick button{padding:18px;border-radius:18px;border:1px solid var(--line);background:#fff;font-weight:900}@media(max-width:1100px){.app{grid-template-columns:1fr}.side{height:auto;position:relative}.nav{display:flex;overflow:auto}.grid4,.grid3,.grid2,.layout3,.layout2side,.chat{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== 用户头像下拉菜单样式 ===== */
+.user-menu{position:relative;display:inline-block;cursor:pointer}
+.user-trigger{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:12px;transition:background .2s}
+.user-trigger:hover{background:rgba(37,99,235,.08)}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--p));color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex-shrink:0}
+.user-name{font-weight:600;color:var(--text);font-size:14px}
+.dropdown{display:none;position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 28px rgba(15,23,42,.12);min-width:160px;overflow:hidden;z-index:100}
+.dropdown.show{display:block}
+.dropdown-item{display:flex;align-items:center;gap:10px;padding:12px 16px;color:var(--text);text-decoration:none;font-size:14px;transition:background .15s;border:none;background:none;width:100%;cursor:pointer}
+.dropdown-item:hover{background:#f1f5f9}
+.dropdown-item.logout{color:var(--bad)}
+.dropdown-item.logout:hover{background:#fee2e2}
+.dropdown-divider{height:1px;background:var(--line);margin:4px 0}
+</style></head><body><div class="app"><aside class="side"><div class="brand"><div class="mark">学</div>学生学习端</div><nav class="nav"><a class="active" onclick="show('home',this)">学习首页</a><a onclick="show('kg',this)">知识图谱</a><a onclick="show('path',this)">学习路径</a><a onclick="show('practice',this)">在线练习</a><a onclick="show('wrong',this)">错题本</a><a onclick="show('variant',this)">错题变式</a><a onclick="show('radar',this)">能力雷达图</a><a onclick="show('qa',this)">AI课程问答</a><a onclick="show('profile',this)">个人中心</a></nav></aside><main class="main"><header class="top"><b>AI课程教辅系统｜《软件需求分析原理与实践》</b>
+<div style="display:flex;align-items:center;gap:20px">
+  <span>🔔 今日任务 3 项</span>
+  <div class="user-menu" id="userMenu">
+    <div class="user-trigger" onclick="toggleMenu()">
+      <div class="avatar">张</div>
+      <span class="user-name">张同学</span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="opacity:.5"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="dropdown" id="userDropdown">
+      <a class="dropdown-item" onclick="jump('profile')"><span>👤</span> 个人中心</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item logout" href="login1.1.html"><span>🚪</span> 退出登录</a>
+    </div>
+  </div>
+</div>
+</header><div class="content">
+<section id="home" class="section active"><div class="card hero"><h1>欢迎回来，张同学</h1><p>当前学习进度 68%，建议今天重点复习“需求获取”和“用例建模”。</p><div class="progress"><i style="width:68%"></i></div></div><div class="grid3" style="margin-top:16px"><div class="card"><h3>今日学习任务</h3><p>待完成练习：需求获取专项练习</p><p>推荐复习：访谈法、问卷法</p><p>截止时间：今晚 22:00</p><button class="btn primary" onclick="jump('practice')">开始练习</button></div><div class="card"><h3>我的能力概览</h3><p>总体掌握度：76%</p><p>薄弱项：第12章 UML建模、第17章 确认需求</p><div class="radar" id="miniRadar" style="height:180px"></div></div><div class="card"><h3>推荐学习路径</h3><p>1. 先复习：需求获取</p><p>2. 再练习：用例建模</p><p>3. 最后挑战：案例分析题</p><button class="btn" onclick="jump('path')">查看路径</button></div></div><div class="card" style="margin-top:16px"><h3>快捷入口</h3><div class="quick"><button onclick="jump('kg')">知识图谱</button><button onclick="jump('practice')">在线练习</button><button onclick="jump('wrong')">错题本</button><button onclick="jump('qa')">AI问答</button><button onclick="jump('radar')">能力报告</button></div></div></section>
+<section id="kg" class="section"><div class="title"><div><h1>知识图谱导航</h1><p>用可视化方式理解课程知识结构，红色节点代表薄弱知识点。</p></div></div><div class="layout2side"><div class="card"><div class="graph"><div class="line l1"></div><div class="line l2"></div><div class="line l3"></div><div class="line l4"></div><div class="node learn n1">课程</div><div class="node master n2">需求工程</div><div class="node weak n3" onclick="jump('practice')">UML建模</div><div class="node learn n4">需求获取</div><div class="node unlearn n5">需求验证</div></div><p><span class="badge green">已掌握</span> <span class="badge blue">学习中</span> <span class="badge red">薄弱</span> <span class="badge gray">未学习</span></p></div><div class="card"><h3>知识点详情</h3><p><b>知识点：</b>UML 用例建模</p><p><b>所属章节：</b>第4章 UML建模</p><p><b>解释：</b>用于描述参与者与系统之间的功能交互。</p><p><b>前置知识：</b>需求获取、业务流程</p><p><b>推荐资料：</b>第4章PPT、用例图案例</p><p><b>我的掌握度：</b>52%</p><button class="btn primary" onclick="jump('practice')">开始对应练习</button><button class="btn">加入学习计划</button></div></div></section>
+<section id="path" class="section"><div class="title"><div><h1>个性化学习路径</h1><p>根据答题情况和知识图谱掌握情况推荐下一步学习内容。</p></div></div><div class="layout2side"><div class="card timeline"><div class="task"><h3>第一步：复习基础概念</h3><p>知识点：需求获取｜原因：最近 3 次错误集中出现｜预计 20 分钟</p><button class="btn">开始</button></div><div class="task"><h3>第二步：完成推荐练习</h3><p>知识点：用例建模｜原因：掌握度低于班级平均｜预计 30 分钟</p><button class="btn primary" onclick="jump('practice')">开始</button></div><div class="task"><h3>第三步：查看错题解析</h3><p>知识点：非功能需求｜状态：待完成</p></div><div class="task"><h3>第四步：进行变式训练</h3><p>针对错题自动生成相似题。</p></div><div class="task"><h3>第五步：重新评估能力</h3><p>完成后更新能力雷达图。</p></div></div><div class="card"><h3>AI 推荐理由</h3><p>当前薄弱知识点：UML建模、需求获取方法。</p><p>学习目标：能根据案例识别参与者、用例和业务边界。</p><p>推荐策略：先复习概念，再进行错题变式。</p></div></div></section>
+<section id="practice" class="section"><div class="title"><div><h1>在线练习</h1><p>完成教师发布或 AI 推荐的专项练习。</p></div><button class="btn primary">提交试卷</button></div><div class="layout2side"><div class="card"><p><b>练习名称：</b>需求获取与 UML 专项练习　<b>剩余时间：</b>38:26　<b>当前题号：</b>3/20</p><div class="progress"><i style="width:15%"></i></div><div class="question">3. 在绘制用例图时，参与者通常表示什么？</div><div class="option">A. 数据库表</div><div class="option">B. 与系统交互的外部角色</div><div class="option">C. 系统内部函数</div><div class="option">D. 类的私有成员</div><button class="btn">上一题</button> <button class="btn">标记本题</button> <button class="btn primary">下一题</button><div class="warnbox"><b>提交后反馈模拟：</b>得分 82，正确率 82%，错题 4 道，薄弱知识点：UML建模、需求验证。可查看解析并生成能力雷达图。</div></div><div class="card"><h3>题号导航</h3><div class="qnav"><span class="done">1</span><span class="done">2</span><span class="mark">3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div><button class="btn primary" style="margin-top:16px;width:100%" onclick="jump('radar')">生成能力雷达图</button></div></div></section>
+<section id="wrong" class="section"><div class="title"><div><h1>错题本</h1><p>集中管理错题，帮助复习薄弱知识点。</p></div></div><div class="card"><p><select class="input"><option>全部章节</option></select> <select class="input"><option>全部知识点</option></select> <select class="input"><option>全部题型</option></select> <select class="input"><option>按错误次数</option></select></p><table class="table"><thead><tr><th>题目摘要</th><th>知识点</th><th>错误次数</th><th>最近错误</th><th>掌握状态</th><th>操作</th></tr></thead><tbody><tr><td>用例图参与者含义判断</td><td>UML建模</td><td>3</td><td>2026-05-07</td><td><span class="badge red">未掌握</span></td><td><button class="btn">查看解析</button> <button class="btn primary" onclick="jump('variant')">加入变式练习</button></td></tr><tr><td>访谈问题设计</td><td>需求获取</td><td>2</td><td>2026-05-06</td><td><span class="badge yellow">学习中</span></td><td><button class="btn">标记已掌握</button></td></tr></tbody></table></div></section>
+<section id="variant" class="section"><div class="title"><div><h1>错题变式练习</h1><p>根据错题自动生成相似题，帮助真正掌握知识点。</p></div></div><div class="grid2"><div class="card"><h3>原错题与错误原因</h3><p><b>原错题：</b>在用例图中，参与者表示系统外部交互角色。</p><p><b>错误原因：</b>将“参与者”误认为系统内部模块。</p><p><b>对应知识点：</b>UML 用例建模</p></div><div class="card"><h3>AI 生成的变式题</h3><p>在校园会议室预约系统中，“授课教师”在用例图中更可能被建模为什么？</p><textarea class="input" style="height:90px;padding:12px" placeholder="请输入答案"></textarea><br><br><button class="btn primary">提交答案</button><div class="warnbox">提交后显示：判断正确/错误、解析、与原题的相似点和变化点，并推荐继续练习或返回错题本。</div></div></div></section>
+<section id="radar" class="section"><div class="title"><div><h1>能力雷达图</h1><p>展示多个能力维度上的掌握情况，并与班级平均水平对比。</p></div></div><div class="grid2"><div class="card"><h3>大型能力雷达图</h3><div class="radar" id="bigRadar" style="height:360px"></div><p style="color:var(--muted);font-size:13px">维度：第1章、第7章、第8章、第10章、第11章、第12章、第14章、第17章</p></div><div class="card"><h3>薄弱项分析与 AI 学习建议</h3><p>UML 建模能力较弱（第12章），确认需求掌握不足（第17章）。</p><p>推荐复习章节：第7章需求获取、第12章一图胜千言、第17章确认需求。</p><p>推荐练习题：用例图识别、案例分析题、需求验证 checklist。</p><p>历史趋势：最近 3 次练习后第8章理解用户需求提升，第12章建模能力波动。</p><button class="btn primary" onclick="jump('path')">查看下一步学习路径</button></div></div></section>
+<section id="qa" class="section"><div class="title"><div><h1>AI 课程问答</h1><p>基于课程知识库提问，回答显示引用来源和推荐练习。</p></div></div><div class="chat"><div class="card history"><h3>历史会话</h3><p>什么是需求获取？</p><p>用例图和类图区别？</p><p>如何判断需求完整？</p><p>根据错题复习 UML</p></div><div class="card" style="display:flex;flex-direction:column"><div style="flex:1"><div class="msg me">用例图和类图有什么区别？</div><div class="msg ai">用例图描述系统外部参与者与系统功能之间的交互，类图描述系统内部类、属性、方法和关系。<br><br><b>引用来源：</b>第4章 UML建模.pptx / 用例建模案例.pdf<br><b>相关知识点：</b>用例、参与者、类、关联关系<br><b>推荐练习：</b>UML建模专项练习第3题、第8题</div><div class="warnbox">AI 回答仅供学习参考，请结合教师讲解和课程资料确认。</div></div><div class="inputbar"><input class="input" placeholder="输入课程相关问题，例如：什么是需求获取？"><button class="btn primary">发送</button></div></div></div></section>
+<section id="profile" class="section"><div class="title"><div><h1>个人中心</h1><p>学生账号、学习统计与设置。</p></div></div><div class="grid2"><div class="card"><h3>基础信息</h3><p>头像：张</p><p>姓名：张同学</p><p>角色：学生</p><p>账号：student001</p><button class="btn">修改密码</button> <button class="btn">通知设置</button> <button class="btn">主题设置</button></div><div class="card"><h3>学生统计</h3><p>学习进度：68%</p><p>已完成练习数量：24</p><p>累计学习时长：36 小时</p><button class="btn primary" onclick="jump('radar')">能力报告入口</button></div></div></section>
+</div></main></div><script>
+function show(id,el){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');window.scrollTo(0,0)}function jump(id){show(id,document.querySelector('.nav a[onclick*="'+id+'"]'))}
+
+/* ===== 用户菜单交互 ===== */
+function toggleMenu(){
+  const d=document.getElementById('userDropdown');
+  d.classList.toggle('show');
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('userMenu');
+  if(!menu.contains(e.target)){
+    document.getElementById('userDropdown').classList.remove('show');
+  }
+});
+
+/* ===== ECharts 雷达图 ===== */
+let miniChart = null, bigChart = null;
+
+function initMiniRadar() {
+  if(miniChart) return;
+  const dom = document.getElementById('miniRadar');
+  if(!dom) return;
+  miniChart = echarts.init(dom);
+  miniChart.setOption({
+    radar: {
+      indicator: [
+        { name: '第7章\n需求获取', max: 100 },
+        { name: '第8章\n理解用户', max: 100 },
+        { name: '第10章\n记录需求', max: 100 },
+        { name: '第12章\n一图胜千言', max: 100 },
+        { name: '第14章\n功能以外', max: 100 },
+        { name: '第17章\n确认需求', max: 100 }
+      ],
+      radius: '60%',
+      center: ['50%', '50%'],
+      axisName: { color: '#64748b', fontSize: 10, lineHeight: 14 },
+      splitArea: { areaStyle: { color: ['#f8fafc', '#fff'] } },
+      axisLine: { lineStyle: { color: '#e2e8f0' } },
+      splitLine: { lineStyle: { color: '#e2e8f0' } }
+    },
+    series: [{
+      type: 'radar',
+      data: [{
+        value: [75, 82, 68, 52, 70, 48],
+        name: '我的掌握度',
+        areaStyle: { color: 'rgba(37,99,235,0.25)' },
+        lineStyle: { color: '#2563eb', width: 2.5 },
+        itemStyle: { color: '#2563eb', borderWidth: 2, borderColor: '#fff' },
+        label: { show: true, formatter: '{c}', color: '#2563eb', fontSize: 10, fontWeight: 'bold' }
+      }]
+    }],
+    tooltip: { trigger: 'item' }
+  });
+}
+
+function initBigRadar() {
+  if(bigChart) return;
+  const dom = document.getElementById('bigRadar');
+  if(!dom) return;
+  bigChart = echarts.init(dom);
+  bigChart.setOption({
+    legend: {
+      data: ['我的掌握度', '班级平均'],
+      bottom: 4,
+      textStyle: { color: '#475569', fontSize: 12 }
+    },
+    radar: {
+      indicator: [
+        { name: '第1章 软件需求的本质', max: 100 },
+        { name: '第7章 需求获取', max: 100 },
+        { name: '第8章 理解用户需求', max: 100 },
+        { name: '第10章 记录需求', max: 100 },
+        { name: '第11章 写出优秀的需求', max: 100 },
+        { name: '第12章 一图胜千言', max: 100 },
+        { name: '第14章 功能需求以外', max: 100 },
+        { name: '第17章 确认需求', max: 100 }
+      ],
+      radius: '58%',
+      center: ['50%', '46%'],
+      axisName: { color: '#475569', fontSize: 11, lineHeight: 16 },
+      splitArea: { areaStyle: { color: ['#f8fafc', '#fff'] } },
+      axisLine: { lineStyle: { color: '#cbd5e1' } },
+      splitLine: { lineStyle: { color: '#cbd5e1' } }
+    },
+    series: [{
+      type: 'radar',
+      data: [
+        {
+          value: [78, 75, 82, 68, 70, 52, 70, 48],
+          name: '我的掌握度',
+          areaStyle: { color: 'rgba(37,99,235,0.22)' },
+          lineStyle: { color: '#2563eb', width: 2.5 },
+          itemStyle: { color: '#2563eb', borderWidth: 2, borderColor: '#fff' },
+          label: { show: false }
+        },
+        {
+          value: [72, 70, 75, 74, 68, 65, 72, 66],
+          name: '班级平均',
+          areaStyle: { color: 'rgba(148,163,184,0.12)' },
+          lineStyle: { color: '#94a3b8', width: 2, type: 'dashed' },
+          itemStyle: { color: '#94a3b8', borderWidth: 2, borderColor: '#fff' },
+          symbol: 'circle',
+          symbolSize: 6
+        }
+      ]
+    }],
+    tooltip: { trigger: 'item' }
+  });
+}
+
+// 页面加载后初始化首页雷达图
+window.addEventListener('load', () => {
+  setTimeout(initMiniRadar, 120);
+});
+
+// 切换页面时初始化对应雷达图
+const _origShow = show;
+show = function(id, el) {
+  _origShow(id, el);
+  if(id === 'home') setTimeout(initMiniRadar, 120);
+  if(id === 'radar') setTimeout(initBigRadar, 120);
+};
+
+// 窗口自适应
+window.addEventListener('resize', () => {
+  miniChart && miniChart.resize();
+  bigChart && bigChart.resize();
+});
+</script><script>
+window.PROFILE_CONFIG={
+  pageKey:'student',
+  realName:'张同学',
+  role:'学生',
+  account:'student001',
+  personId:'32301299',
+  organizationLabel:'系级',
+  organization:'计算机与计算科学学院2023软件工程2304',
+  email:'None',
+  phone:'',
+  defaultAvatarText:'张',
+  description:'学生账号、学习统计、头像和展示名称设置。',
+  statsTitle:'学生统计',
+  stats:[
+    {label:'学习进度',value:'68%'},
+    {label:'已完成练习数量',value:'24'},
+    {label:'累计学习时长',value:'36 小时'}
+  ],
+  actions:[
+    {label:'修改密码'},
+    {label:'通知设置'},
+    {label:'主题设置'},
+    {label:'能力报告入口',type:'primary',target:'radar'}
+  ],
+  updateGreeting:true
+};
+</script><script src="profile-settings.js"></script></body></html>
